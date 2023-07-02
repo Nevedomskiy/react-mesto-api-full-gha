@@ -4,7 +4,7 @@ import '../index.css';
 import imgSuccess from '../images/Union.svg';
 import imgFail from '../images/Fail.svg';
 import Header from './Header';
-import { instApi } from '../utils/api.js';
+import { api } from '../utils/api.js';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm.js';
@@ -37,8 +37,8 @@ function App() {
   useEffect(() => {
     Promise.all(
       [
-        instApi.getDataProfile(),
-        instApi.getDataCards(),
+        api.getDataProfile(),
+        api.getDataCards(),
         tempLogin.current()
       ])
       .then(([userData, cardData]) => {
@@ -72,7 +72,7 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    instApi.changeLikeCardStatus(card._id, !isLiked)
+    api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
@@ -82,7 +82,7 @@ function App() {
   }
 
   function handleUpdateUser(newDataUser) {
-    instApi.patchDataProfile(newDataUser)
+    api.patchDataProfile(newDataUser)
       .then((result) => {
         setСurrentUser(prev => {
           return {
@@ -99,7 +99,7 @@ function App() {
   }
 
   function handleUpdateAvatar(newAvatar) {
-    instApi.patchAvatarProfile(newAvatar)
+    api.patchAvatarProfile(newAvatar)
       .then((result) => {
         setСurrentUser(prev => {
           return {
@@ -115,7 +115,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit(newCard) {
-    instApi.postNewCard(newCard)
+    api.postNewCard(newCard)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
@@ -126,7 +126,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    instApi.deleteCard(card._id)
+    api.deleteCard(card._id)
       .then(() => {
         setCards(cards.filter(item =>
           item !== card

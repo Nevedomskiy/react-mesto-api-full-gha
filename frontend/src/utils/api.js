@@ -135,10 +135,6 @@ class Api {
 
 }
 
-//api данных карточек
-export const instApi = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-62/',
-  headers: {
-    authorization: 'b1a969d4-2380-4487-99eb-f12d66954c40'
-  }
+export const api = new Api({
+  url: 'https://practic.backend.nvv.nomoreparties.sbs',
 });
