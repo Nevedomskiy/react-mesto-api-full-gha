@@ -1,0 +1,4 @@
+.photo__like_active {
+   opacity: 1;
+   background: url(../../../../images/serdBlack.svg) 0 0/ cover no-repeat;
+}

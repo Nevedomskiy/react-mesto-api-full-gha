@@ -1,0 +1,26 @@
+.popup-message-img {
+   max-width: 120px;
+   object-fit: cover;
+   margin: 60px auto 8px;
+}
+
+.popup-message-text {
+   font-style: normal;
+   font-weight: 900;
+   font-size: 24px;
+   line-height: 29px;
+   text-align: center;
+   margin-bottom: 60px;
+}
+
+@media screen and (max-width: 787px) {
+   .popup-message-text {
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 50px;
+   }
+
+   .popup-message-img {
+      margin: 50px auto 20 px;
+   }
+}

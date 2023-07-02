@@ -1,0 +1,17 @@
+.photo__delete {
+   background: url(../../../images/delete.svg) 0 0 / cover no-repeat;
+   min-width: 18px;
+   min-height: 19px;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   border: 0;
+   position: absolute;
+   right: 20px;
+   top: 20px;
+   cursor: pointer;
+}
+
+.photo__delete:hover {
+   opacity: 0.6;
+}

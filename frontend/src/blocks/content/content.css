@@ -1,0 +1,11 @@
+.content {
+   box-sizing: border-box;
+   margin: 0 16px;
+   flex: 1;
+}
+
+@media screen and (min-width: 1024px) {
+   .content {
+      margin: 0 200px;
+   }
+}

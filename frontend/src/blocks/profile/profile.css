@@ -1,0 +1,12 @@
+.profile {
+   margin-top: 42px;
+   color: #FFFFFF;
+}
+
+@media screen and (min-width: 1024px) {
+   .profile {
+      margin-top: 39px;
+      display: flex;
+      justify-content: space-between;
+   }
+}

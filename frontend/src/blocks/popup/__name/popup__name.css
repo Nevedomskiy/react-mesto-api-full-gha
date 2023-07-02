@@ -1,0 +1,17 @@
+.popup__name {
+   font-weight: 400;
+   font-size: 12px;
+   line-height: 15px;
+   color: #FFFFFF;
+   max-width: 291px;
+   margin: 10px 0 0;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+}
+
+@media screen and (min-width: 400px) {
+   .popup__name {
+      max-height: 540px;
+   }
+}

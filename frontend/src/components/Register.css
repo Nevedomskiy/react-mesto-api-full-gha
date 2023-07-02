@@ -1,0 +1,8 @@
+.register-link-login {
+   text-decoration: none;
+   color: #fff;
+}
+
+.register-link-login:hover {
+   opacity: 0.6;
+}

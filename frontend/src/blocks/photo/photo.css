@@ -1,0 +1,9 @@
+.photo {
+  margin-top: 36px;
+}
+
+@media screen and (min-width: 1024px) {
+  .photo {
+    margin-top: 52px;
+  }
+}

@@ -1,0 +1,12 @@
+.popup__text-error {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  min-height: 30px;
+  display: flex;
+}
+
+.popup__text-error:last-of-type {
+  margin-bottom: 2px;
+}

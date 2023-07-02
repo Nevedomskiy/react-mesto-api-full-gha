@@ -1,0 +1,13 @@
+.photo__name {
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+
+  margin: 0 19px 26px 21px;
+}
+
+@media screen and (min-width: 768px) {
+  .photo__name {
+    margin: 0 20px 19px 21px;
+  }
+}

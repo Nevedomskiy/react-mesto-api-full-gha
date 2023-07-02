@@ -1,0 +1,150 @@
+.header-button {
+   all: unset;
+}
+
+.header {
+   position: relative;
+   margin: 0 0 27px;
+   padding: 28px 27px 27px;
+   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+   display: flex;
+   justify-content: space-between;
+   transition: all 0.5s ease-out;
+}
+
+.header-link {
+   cursor: pointer;
+   text-decoration: none;
+   color: #FFFFFF;
+}
+
+.header-logo {
+   object-fit: cover;
+}
+
+.burger {
+   display: none;
+   list-style: none;
+}
+
+.header-element {
+   margin: 1px 0 0;
+}
+
+.header-element:first-of-type {
+   margin-right: 24px;
+}
+
+.header-link:hover {
+   opacity: 0.6;
+}
+
+.header-list {
+   margin: 6px -2px 0;
+   font-style: normal;
+   font-weight: 400;
+   font-size: 18px;
+   line-height: 22px;
+   text-align: right;
+   color: #FFFFFF;
+   list-style: none;
+   padding: 0;
+   display: flex;
+   justify-content: flex-start;
+   align-self: flex-start;
+   transition: all 0.5s ease-out;
+}
+
+.burger-second-line {
+   display: none;
+}
+
+.burger-first-line {
+   transform: rotate(-45deg) translate(-6px, 7px);
+}
+
+.burger-third-line {
+   transform: rotate(45deg) translate(-6px, -8px);
+}
+
+@media screen and (max-width: 640px) {
+   .header-link {
+      margin-top: 0px;
+      margin-right: 0;
+      color: #A9A9A9;
+   }
+
+   .header-active {
+      padding-top: 142px;
+   }
+
+   .header::after {
+      position: absolute;
+      content: "";
+      left: 0;
+      bottom: 84px;
+      background-color: rgba(84, 84, 84, 0.7);
+      height: 1px;
+      width: 100%;
+   }
+
+   .burger {
+      position: relative;
+      cursor: pointer;
+      display: block;
+      width: 24px;
+      min-height: 22px;
+      padding: 0;
+      margin: 0 6px 0;
+   }
+
+   .burger-line {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: #FFFFFF;
+      margin-top: 5px;
+      transition: all 0.5s ease-out;
+   }
+
+   .burger-line:first-child {
+      top: -1px;
+   }
+
+   .burger-line:nth-child(2) {
+      top: 8px
+   }
+
+   .burger-line:last-child {
+      bottom: -2px;
+   }
+
+   .header-list {
+      margin: 0;
+      display: block;
+      font-size: 18px;
+      line-height: 22px;
+      position: absolute;
+      opacity: 0;
+      top: 14px;
+      left: 50%;
+      text-align: center;
+      transform: translate(-50%, -0);
+   }
+
+   .header-list-active {
+      opacity: 1;
+   }
+
+   .header-element:first-of-type {
+      margin-right: 0;
+      margin-bottom: 18px;
+   }
+}
+
+@media screen and (min-width: 1024px) {
+   .header {
+      margin: 0 200px 0 203px;
+      padding: 45px 0 37px;
+   }
+}

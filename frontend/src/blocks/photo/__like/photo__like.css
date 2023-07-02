@@ -1,0 +1,13 @@
+.photo__like {
+   margin: 0;
+   padding: 0;
+   min-width: 22px;
+   min-height: 19px;
+   background: url(../../../images/serd.svg) 0 0/ cover no-repeat;
+   cursor: pointer;
+   border: none;
+}
+
+.photo__like:hover {
+   opacity: 0.5;
+}

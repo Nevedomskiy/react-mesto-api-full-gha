@@ -1,0 +1,10 @@
+.profile__content {
+   display: flex;
+   gap: 0 10px;
+}
+
+@media screen and (min-width: 1024px) {
+   .profile__content {
+      gap: 0 20px;
+   }
+}

@@ -1,0 +1,15 @@
+.popup__input {
+   display: flex;
+   justify-items: left;
+   align-items: center;
+   border: 0;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+   font-size: 14px;
+   line-height: 17px;
+   min-height: 33px;
+   padding: 0;
+}
+
+.popup__input:focus {
+   outline: 2px solid rgba(68, 104, 224, 0.7);
+}
