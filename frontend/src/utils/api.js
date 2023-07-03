@@ -1,7 +1,6 @@
 class Api {
   constructor(config) {
     this._url = config.url;
-    this._authorization = config.headers.authorization
   }
 
   _getResponseData(res) {
@@ -136,5 +135,5 @@ class Api {
 }
 
 export const api = new Api({
-  url: 'https://practic.backend.nvv.nomoreparties.sbs',
+  url: 'https://practic.backend.nvv.nomoreparties.sbs/',
 });
