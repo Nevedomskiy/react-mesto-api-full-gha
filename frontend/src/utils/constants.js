@@ -7,4 +7,4 @@ export const formValidationConfig = {
   buttonSubmitDisabledClass: 'popup__submit-btn_disabled'
 }
 
-export const BASE_URL = 'https://practic.front.nvv.nomoreparties.sbs';
+export const BASE_URL = 'https://practic.backend.nvv.nomoreparties.sbs';
