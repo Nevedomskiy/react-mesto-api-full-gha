@@ -4,7 +4,7 @@ import '../index.css';
 import imgSuccess from '../images/Union.svg';
 import imgFail from '../images/Fail.svg';
 import Header from './Header';
-import { api } from '../utils/api.js';
+import { instApi } from '../utils/api.js';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm.js';
@@ -37,8 +37,8 @@ function App() {
   useEffect(() => {
     Promise.all(
       [
-        api.getDataProfile(),
-        api.getDataCards(),
+        instApi.getDataProfile(),
+        instApi.getDataCards(),
         tempLogin.current()
       ])
       .then(([userData, cardData]) => {
@@ -72,7 +72,7 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, !isLiked)
+    instApi.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
@@ -82,7 +82,7 @@ function App() {
   }
 
   function handleUpdateUser(newDataUser) {
-    api.patchDataProfile(newDataUser)
+    instApi.patchDataProfile(newDataUser)
       .then((result) => {
         setСurrentUser(prev => {
           return {
@@ -99,7 +99,7 @@ function App() {
   }
 
   function handleUpdateAvatar(newAvatar) {
-    api.patchAvatarProfile(newAvatar)
+    instApi.patchAvatarProfile(newAvatar)
       .then((result) => {
         setСurrentUser(prev => {
           return {
@@ -115,7 +115,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit(newCard) {
-    api.postNewCard(newCard)
+    instApi.postNewCard(newCard)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
@@ -126,7 +126,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id)
+    instApi.deleteCard(card._id)
       .then(() => {
         setCards(cards.filter(item =>
           item !== card
@@ -175,8 +175,8 @@ function App() {
           <Header email={email} />
 
           <Routes>
-            <Route path="/signup" element={<Register handeleOpenPopupSuccess={setSuccessPopupOpen} handeleOpenPopupFail={setFailPopupOpen} />} />
-            <Route path="/signin" element={<Login handleLogin={handleLogin} currentEmail={setEmail} handeleOpenPopupFail={setFailPopupOpen} />} />
+            <Route path="/sign-up" element={<Register handeleOpenPopupSuccess={setSuccessPopupOpen} handeleOpenPopupFail={setFailPopupOpen} />} />
+            <Route path="/sign-in" element={<Login handleLogin={handleLogin} currentEmail={setEmail} handeleOpenPopupFail={setFailPopupOpen} />} />
             <Route
               path="/"
               element={

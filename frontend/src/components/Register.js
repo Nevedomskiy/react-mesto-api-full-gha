@@ -28,7 +28,7 @@ function Register({ handeleOpenPopupSuccess, handeleOpenPopupFail }) {
       auth.register(formValue.email, formValue.password)
          .then((res) => {
             handeleOpenPopupSuccess(true);
-            navigate('/signup', { replace: true });
+            navigate('/sign-in', { replace: true });
          })
          .catch((err) => {
             handeleOpenPopupFail(true);

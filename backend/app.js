@@ -12,7 +12,7 @@ const userRouter = require('./routes/users');
 const auth = require('./middlewares/auth');
 const { validIsURL } = require('./validation/validation');
 const NotFoundError = require('./errors/not-found-err');
-const corsOptions = require('./middlewares/cors');
+const corsOptions = require('./middlewares/corsOptions');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const URL = 'mongodb://localhost:27017/mestodb';
@@ -36,14 +36,16 @@ mongoose
 //   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
 //   next();
 // });
-app.use(requestLogger);
-// app.use(cors);
-app.use(cors(corsOptions));
+
 app.use(limiter);
 app.use(helmet());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(requestLogger);
+// app.use(cors);
+app.use(cors(corsOptions));
 
 app.get('/crash-test', () => {
   setTimeout(() => {

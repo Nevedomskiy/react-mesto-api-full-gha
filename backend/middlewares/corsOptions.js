@@ -1,5 +1,6 @@
 const allowedCors = [
   'https://practic.front.nvv.nomoreparties.sbs',
+  'http://practic.front.nvv.nomoreparties.sbs',
   'http://localhost:3000',
 ];
 

@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://practic.backend.nvv.nomoreparties.sbs';
+import { BASE_URL } from '../utils/constants';
 
 export const register = (email, password) => {
    return fetch(`${BASE_URL}/signup`, {

@@ -1,3 +1,5 @@
+import {BASE_URL} from './constants';
+
 class Api {
   constructor(config) {
     this._url = config.url;
@@ -126,6 +128,6 @@ class Api {
 
 }
 
-export const api = new Api({
-  url: 'https://practic.backend.nvv.nomoreparties.sbs',
+export const instApi = new Api({
+  url: BASE_URL,
 });
