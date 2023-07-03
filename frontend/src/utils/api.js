@@ -13,7 +13,7 @@ class Api {
 
   //получение данных карточек
   getDataCards() {
-    return fetch(`${this._url}/cards`, {
+    return fetch(`${this._url}/cards`, { credentials: 'include' }, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -27,7 +27,7 @@ class Api {
 
   //получение данных пользователя
   getDataProfile() {
-    return fetch(`${this._url}/users/me`, {
+    return fetch(`${this._url}/users/me`, { credentials: 'include' }, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -42,7 +42,7 @@ class Api {
 
   //редактирование данных пользователя
   patchDataProfile(data) {
-    return fetch(`${this._url}/users/me`, {
+    return fetch(`${this._url}/users/me`, { credentials: 'include' }, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
@@ -60,7 +60,7 @@ class Api {
 
   //редактирование аватара
   patchAvatarProfile(data) {
-    return fetch(`${this._url}/users/me/avatar`, {
+    return fetch(`${this._url}/users/me/avatar`, { credentials: 'include' }, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
@@ -77,7 +77,7 @@ class Api {
 
   //создание новой карточки
   postNewCard(data) {
-    return fetch(`${this._url}/cards`, {
+    return fetch(`${this._url}/cards`, { credentials: 'include' }, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -95,7 +95,7 @@ class Api {
 
   //удаление карточки
   deleteCard(dataId) {
-    return fetch(`${this._url}/cards/${dataId}`, {
+    return fetch(`${this._url}/cards/${dataId}`, { credentials: 'include' }, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
@@ -110,7 +110,7 @@ class Api {
 
   changeLikeCardStatus(dataId, isLiked) {
     if (isLiked) {
-      return fetch(`${this._url}/cards/${dataId}/likes`, {
+      return fetch(`${this._url}/cards/${dataId}/likes`, { credentials: 'include' }, {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
@@ -122,7 +122,7 @@ class Api {
         })
     }
     else {
-      return fetch(`${this._url}/cards/${dataId}/likes/`, {
+      return fetch(`${this._url}/cards/${dataId}/likes/`, { credentials: 'include' }, {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',
