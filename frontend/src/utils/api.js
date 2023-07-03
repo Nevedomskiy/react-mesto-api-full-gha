@@ -1,8 +1,9 @@
-import {BASE_URL} from './constants';
+import { BASE_URL } from './constants';
 
 class Api {
   constructor(config) {
     this._url = config.url;
+    this._authorization = config.headers.authorization
   }
 
   _getResponseData(res) {
@@ -16,6 +17,7 @@ class Api {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
+        authorization: this._authorization
       }
     })
       .then((res) => {
@@ -29,6 +31,7 @@ class Api {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
+        authorization: this._authorization
       }
     })
       .then((res) => {
@@ -43,6 +46,7 @@ class Api {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
+        authorization: this._authorization
       },
       body: JSON.stringify({
         name: data.name,
@@ -60,6 +64,7 @@ class Api {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
+        authorization: this._authorization
       },
       body: JSON.stringify({
         avatar: data.avatar
@@ -76,6 +81,7 @@ class Api {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
+        authorization: this._authorization
       },
       body: JSON.stringify({
         name: data.name,
@@ -93,6 +99,7 @@ class Api {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
+        authorization: this._authorization
       }
     })
       .then((res) => {
@@ -107,6 +114,7 @@ class Api {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
+          authorization: this._authorization
         }
       })
         .then((res) => {
@@ -118,6 +126,7 @@ class Api {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',
+          authorization: this._authorization
         }
       })
         .then((res) => {
@@ -130,4 +139,7 @@ class Api {
 
 export const instApi = new Api({
   url: BASE_URL,
+  headers: {
+    authorization: `Bearer ${localStorage.getItem("token")}`,
+  }
 });
