@@ -1,7 +1,8 @@
 import { BASE_URL } from '../utils/constants';
 
 export const register = (email, password) => {
-   return fetch(`${BASE_URL}/signup`, { credentials: 'include' }, {
+   return fetch(`${BASE_URL}/signup`, {
+      credentials: 'include',
       method: 'POST',
       headers: {
          'Content-Type': 'application/json'
@@ -23,7 +24,8 @@ export const register = (email, password) => {
 };
 
 export const authorize = (email, password) => {
-   return fetch(`${BASE_URL}/signin`, { credentials: 'include' },{
+   return fetch(`${BASE_URL}/signin`, {
+      credentials: 'include',
       method: 'POST',
       headers: {
          'Content-Type': 'application/json'
@@ -43,7 +45,8 @@ export const authorize = (email, password) => {
 };
 
 export const getContent = (token) => {
-   return fetch(`${BASE_URL}/users/me`, { credentials: 'include' },{
+   return fetch(`${BASE_URL}/users/me`, {
+      credentials: 'include',
       method: 'GET',
       headers: {
          'Content-Type': 'application/json',

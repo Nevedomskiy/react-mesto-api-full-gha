@@ -13,9 +13,10 @@ class Api {
 
   //получение данных карточек
   getDataCards() {
-    return fetch(`${this._url}/cards`, { credentials: 'include' }, {
+    return fetch(`${this._url}/cards`, {
       method: 'GET',
       headers: {
+        credentials: 'include',
         'content-type': 'application/json',
         authorization: this._authorization
       }
@@ -27,9 +28,10 @@ class Api {
 
   //получение данных пользователя
   getDataProfile() {
-    return fetch(`${this._url}/users/me`, { credentials: 'include' }, {
+    return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: {
+        credentials: 'include',
         'content-type': 'application/json',
         authorization: this._authorization
       }
@@ -42,9 +44,10 @@ class Api {
 
   //редактирование данных пользователя
   patchDataProfile(data) {
-    return fetch(`${this._url}/users/me`, { credentials: 'include' }, {
+    return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
+        credentials: 'include',
         'content-type': 'application/json',
         authorization: this._authorization
       },
@@ -60,9 +63,10 @@ class Api {
 
   //редактирование аватара
   patchAvatarProfile(data) {
-    return fetch(`${this._url}/users/me/avatar`, { credentials: 'include' }, {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
+        credentials: 'include',
         'content-type': 'application/json',
         authorization: this._authorization
       },
@@ -77,9 +81,10 @@ class Api {
 
   //создание новой карточки
   postNewCard(data) {
-    return fetch(`${this._url}/cards`, { credentials: 'include' }, {
+    return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: {
+        credentials: 'include',
         'content-type': 'application/json',
         authorization: this._authorization
       },
@@ -95,9 +100,10 @@ class Api {
 
   //удаление карточки
   deleteCard(dataId) {
-    return fetch(`${this._url}/cards/${dataId}`, { credentials: 'include' }, {
+    return fetch(`${this._url}/cards/${dataId}`, {
       method: 'DELETE',
       headers: {
+        credentials: 'include',
         'content-type': 'application/json',
         authorization: this._authorization
       }
@@ -110,9 +116,10 @@ class Api {
 
   changeLikeCardStatus(dataId, isLiked) {
     if (isLiked) {
-      return fetch(`${this._url}/cards/${dataId}/likes`, { credentials: 'include' }, {
+      return fetch(`${this._url}/cards/${dataId}/likes`, {
         method: 'PUT',
         headers: {
+          credentials: 'include',
           'content-type': 'application/json',
           authorization: this._authorization
         }
@@ -122,9 +129,10 @@ class Api {
         })
     }
     else {
-      return fetch(`${this._url}/cards/${dataId}/likes/`, { credentials: 'include' }, {
+      return fetch(`${this._url}/cards/${dataId}/likes/`, {
         method: 'DELETE',
         headers: {
+          credentials: 'include',
           'content-type': 'application/json',
           authorization: this._authorization
         }
