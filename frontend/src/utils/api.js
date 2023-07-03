@@ -10,7 +10,7 @@ class Api {
 
   //получение данных карточек
   getDataCards() {
-    return fetch(`${this._url}cards`, {
+    return fetch(`${this._url}/cards`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -24,7 +24,7 @@ class Api {
 
   //получение данных пользователя
   getDataProfile() {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -39,7 +39,7 @@ class Api {
 
   //редактирование данных пользователя
   patchDataProfile(data) {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
@@ -57,7 +57,7 @@ class Api {
 
   //редактирование аватара
   patchAvatarProfile(data) {
-    return fetch(`${this._url}users/me/avatar`, {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json',
@@ -74,7 +74,7 @@ class Api {
 
   //создание новой карточки
   postNewCard(data) {
-    return fetch(`${this._url}cards`, {
+    return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -92,7 +92,7 @@ class Api {
 
   //удаление карточки
   deleteCard(dataId) {
-    return fetch(`${this._url}cards/${dataId}`, {
+    return fetch(`${this._url}/cards/${dataId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
@@ -107,7 +107,7 @@ class Api {
 
   changeLikeCardStatus(dataId, isLiked) {
     if (isLiked) {
-      return fetch(`${this._url}cards/${dataId}/likes`, {
+      return fetch(`${this._url}/cards/${dataId}/likes`, {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
@@ -119,7 +119,7 @@ class Api {
         })
     }
     else {
-      return fetch(`${this._url}cards/${dataId}/likes/`, {
+      return fetch(`${this._url}/cards/${dataId}/likes/`, {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',
@@ -135,5 +135,5 @@ class Api {
 }
 
 export const api = new Api({
-  url: 'https://practic.backend.nvv.nomoreparties.sbs/',
+  url: 'https://practic.backend.nvv.nomoreparties.sbs',
 });

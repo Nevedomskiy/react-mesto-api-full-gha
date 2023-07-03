@@ -11,7 +11,7 @@ function Header({ email }) {
 
    function signOut() {
       localStorage.removeItem('jwt');
-      navigate('/sign-in', { replace: true });
+      navigate('/signin', { replace: true });
       handleClickBurger();
    }
 
@@ -45,7 +45,7 @@ function Header({ email }) {
                   <div className='header-menu'>
                      <ul className={`header-list ${activeBurger ? ' header-list-active' : ''}`}>
                         <li className='header-element'>{email}</li>
-                        <li className='header-element'><button to="/sign-up" onClick={signOut} className='header-button header-link'>Выйти</button></li>
+                        <li className='header-element'><button to="/signup" onClick={signOut} className='header-button header-link'>Выйти</button></li>
                      </ul>
 
                      <button onClick={handleClickBurger} className={`burger header-button${activeBurger ? ' burger_active' : ''}`}>
@@ -59,10 +59,10 @@ function Header({ email }) {
                }>
 
             </Route>
-            <Route path="/sign-up" element={
-               <ul className='header-list'><Link to="/sign-in" className='header-link'>Войти</Link></ul>
+            <Route path="/signup" element={
+               <ul className='header-list'><Link to="/signin" className='header-link'>Войти</Link></ul>
             }></Route>
-            <Route path="/sign-in" element={<ul className='header-list'><Link to="/sign-up" className='header-link'>Регистрация</Link></ul>}></Route>
+            <Route path="/signin" element={<ul className='header-list'><Link to="/signup" className='header-link'>Регистрация</Link></ul>}></Route>
          </Routes >
 
       </header >

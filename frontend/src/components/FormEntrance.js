@@ -44,7 +44,7 @@ function FormEntrance({ title, textBtn, handleSubmit, handleChange, formValue })
                </button>
             </form>
 
-            {(textBtn === "Зарегистрироваться") && <p className="entrance-text">Уже зарегистрированы? <Link to="/sign-in" className="register-link-login">Войти</Link></p>}
+            {(textBtn === "Зарегистрироваться") && <p className="entrance-text">Уже зарегистрированы? <Link to="/signin" className="register-link-login">Войти</Link></p>}
 
 
          </div>

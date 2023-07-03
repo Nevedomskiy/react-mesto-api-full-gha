@@ -11,7 +11,7 @@ const userRouter = require('./routes/users');
 const auth = require('./middlewares/auth');
 const { validIsURL } = require('./validation/validation');
 const NotFoundError = require('./errors/not-found-err');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+// const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const URL = 'mongodb://localhost:27017/mestodb';
 const app = express();
@@ -34,7 +34,7 @@ mongoose
 //   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
 //   next();
 // });
-app.use(requestLogger);
+// app.use(requestLogger);
 app.use(limiter);
 app.use(helmet());
 app.use(cookieParser());
@@ -73,7 +73,7 @@ app.post(
 app.use(auth);
 app.use('/cards', cardRouter);
 app.use('/users', userRouter);
-app.use(errorLogger);
+// app.use(errorLogger);
 app.use(errors());
 app.use((req, res) => {
   throw new NotFoundError('Маршрут указан некорректно');
