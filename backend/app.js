@@ -5,13 +5,14 @@ const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const { errors, celebrate, Joi } = require('celebrate');
 const cardRouter = require('./routes/cards');
 const userRouter = require('./routes/users');
 const auth = require('./middlewares/auth');
 const { validIsURL } = require('./validation/validation');
 const NotFoundError = require('./errors/not-found-err');
-const cors = require('./middlewares/cors');
+// const cors = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const URL = 'mongodb://localhost:27017/mestodb';
@@ -36,7 +37,11 @@ mongoose
 //   next();
 // });
 app.use(requestLogger);
-app.use(cors);
+// app.use(cors);
+app.use(cors({
+  origin: ['https://practic.front.nvv.nomoreparties.sbs',
+    'http://localhost:3000'],
+}));
 app.use(limiter);
 app.use(helmet());
 app.use(cookieParser());
