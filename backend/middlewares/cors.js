@@ -1,7 +1,7 @@
-// const allowedCors = [
-//   'https://practic.front.nvv.nomoreparties.sbs',
-//   'http://localhost:3000',
-// ];
+const allowedCors = [
+  'https://practic.front.nvv.nomoreparties.sbs',
+  'http://localhost:3000',
+];
 
 // module.exports = (req, res, next) => {
 //   const { origin } = req.headers;
@@ -17,3 +17,14 @@
 //   }
 //   next();
 // };
+
+module.exports.corsOptions = {
+  credentials: true,
+  origin: (origin, callback) => {
+    if (allowedCors.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};

@@ -12,7 +12,7 @@ const userRouter = require('./routes/users');
 const auth = require('./middlewares/auth');
 const { validIsURL } = require('./validation/validation');
 const NotFoundError = require('./errors/not-found-err');
-// const cors = require('./middlewares/cors');
+const corsOptions = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const URL = 'mongodb://localhost:27017/mestodb';
@@ -38,10 +38,7 @@ mongoose
 // });
 app.use(requestLogger);
 // app.use(cors);
-app.use(cors({
-  origin: ['https://practic.front.nvv.nomoreparties.sbs',
-    'http://localhost:3000'],
-}));
+app.use(cors(corsOptions));
 app.use(limiter);
 app.use(helmet());
 app.use(cookieParser());
