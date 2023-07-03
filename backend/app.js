@@ -5,15 +5,14 @@ const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const cors = require('cors');
 const { errors, celebrate, Joi } = require('celebrate');
 const cardRouter = require('./routes/cards');
 const userRouter = require('./routes/users');
 const auth = require('./middlewares/auth');
 const { validIsURL } = require('./validation/validation');
 const NotFoundError = require('./errors/not-found-err');
-const corsOptions = require('./middlewares/corsOptions');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/corsOptions');
 
 const URL = 'mongodb://localhost:27017/mestodb';
 const app = express();
@@ -44,9 +43,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
-// app.use(cors);
-app.use(cors(corsOptions));
-
+app.use(cors);
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');

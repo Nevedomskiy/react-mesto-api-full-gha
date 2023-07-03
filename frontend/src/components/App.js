@@ -174,7 +174,7 @@ function App() {
 
           <Header email={email} />
 
-          <Routes>
+          <Routes >
             <Route path="/sign-up" element={<Register handeleOpenPopupSuccess={setSuccessPopupOpen} handeleOpenPopupFail={setFailPopupOpen} />} />
             <Route path="/sign-in" element={<Login handleLogin={handleLogin} currentEmail={setEmail} handeleOpenPopupFail={setFailPopupOpen} />} />
             <Route
