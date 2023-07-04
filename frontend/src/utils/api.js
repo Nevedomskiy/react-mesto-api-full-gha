@@ -1,9 +1,9 @@
 import { BASE_URL } from './constants';
 
 class Api {
-  constructor(config) {
-    this._url = config.url;
-    this._header = config.headers.authorization
+  constructor({ url, mode, credentials, headers }) {
+    this._url = url;
+    this._config = { mode, credentials, headers };
   }
 
   _getResponseData(res) {
@@ -13,10 +13,7 @@ class Api {
 
   //получение данных карточек
   getDataCards() {
-    return fetch(`${this._url}/cards`, {
-      method: 'GET',
-      headers: this._header
-    })
+    return fetch(`${this._url}/cards`, this._config)
       .then((res) => {
         return this._getResponseData(res);
       })
@@ -24,10 +21,7 @@ class Api {
 
   //получение данных пользователя
   getDataProfile() {
-    return fetch(`${this._url}/users/me`, {
-      method: 'GET',
-      headers: this._header
-    })
+    return fetch(`${this._url}/users/me`, this._config)
       .then((res) => {
         return this._getResponseData(res);
       })
@@ -37,8 +31,8 @@ class Api {
   //редактирование данных пользователя
   patchDataProfile(data) {
     return fetch(`${this._url}/users/me`, {
+      ...this._config,
       method: 'PATCH',
-      headers: this._header,
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -52,8 +46,8 @@ class Api {
   //редактирование аватара
   patchAvatarProfile(data) {
     return fetch(`${this._url}/users/me/avatar`, {
+      ...this._config,
       method: 'PATCH',
-      headers: this._header,
       body: JSON.stringify({
         avatar: data.avatar
       })
@@ -66,8 +60,8 @@ class Api {
   //создание новой карточки
   postNewCard(data) {
     return fetch(`${this._url}/cards`, {
+      ...this._config,
       method: 'POST',
-      headers: this._header,
       body: JSON.stringify({
         name: data.name,
         link: data.link
@@ -81,12 +75,8 @@ class Api {
   //удаление карточки
   deleteCard(dataId) {
     return fetch(`${this._url}/cards/${dataId}`, {
-      method: 'DELETE',
-      headers: {
-        credentials: 'include',
-        'content-type': 'application/json',
-        authorization: this._authorization
-      }
+      ...this._config,
+      method: 'DELETE',     
     })
       .then((res) => {
         return this._getResponseData(res);
@@ -97,8 +87,8 @@ class Api {
   changeLikeCardStatus(dataId, isLiked) {
     if (isLiked) {
       return fetch(`${this._url}/cards/${dataId}/likes`, {
+        ...this._config,
         method: 'PUT',
-        headers: this._header
       })
         .then((res) => {
           return this._getResponseData(res);
@@ -106,8 +96,8 @@ class Api {
     }
     else {
       return fetch(`${this._url}/cards/${dataId}/likes/`, {
+        ...this._config,
         method: 'DELETE',
-        headers: this._header
       })
         .then((res) => {
           return this._getResponseData(res);
@@ -119,9 +109,9 @@ class Api {
 
 export const instApi = new Api({
   url: BASE_URL,
+  mode: 'cors',
   credentials: 'include',
   headers: {
     'content-type': 'application/json',
-    authorization: `Bearer ${localStorage.getItem("jwt")}`,
   }
 });
