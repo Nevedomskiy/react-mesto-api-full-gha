@@ -1,7 +1,7 @@
 const allowedCors = [
-  'https://practic.front.nvv.nomoreparties.sbs',
-  'http://practic.front.nvv.nomoreparties.sbs',
-  'http://localhost:3000',
+  'https://practic.front.nvv.nomoreparties.sbs/#',
+  'http://practic.front.nvv.nomoreparties.sbs/#',
+  'http://localhost:3000/#',
 ];
 
 module.exports = (req, res, next) => {

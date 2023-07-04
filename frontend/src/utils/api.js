@@ -112,6 +112,6 @@ export const instApi = new Api({
   mode: 'cors',
   credentials: 'include',
   headers: {
-    'content-type': 'application/json',
+    'Content-Type': 'application/json',
   }
 });
