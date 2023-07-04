@@ -24,16 +24,11 @@ const limiter = rateLimit({
   max: 100,
 });
 
-mongoose
-  .connect(URL, {
-    useNewUrlParser: true,
-    family: 4,
-  });
-
 app.use(requestLogger);
-app.use(limiter);
+// app.use(limiter);
 // app.use(helmet());
 app.use(cookieParser());
+app.use(express.json());
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -43,6 +38,12 @@ app.use(corsOptions);
 //     throw new Error('Сервер сейчас упадёт');
 //   }, 0);
 // });
+
+mongoose
+  .connect(URL, {
+    useNewUrlParser: true,
+    family: 4,
+  });
 app.post(
   '/signin',
   celebrate({
