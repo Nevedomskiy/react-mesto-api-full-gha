@@ -3,7 +3,7 @@ import { BASE_URL } from './constants';
 class Api {
   constructor(config) {
     this._url = config.url;
-    this._authorization = config.headers.authorization
+    this._header = config.headers.authorization
   }
 
   _getResponseData(res) {
@@ -15,11 +15,7 @@ class Api {
   getDataCards() {
     return fetch(`${this._url}/cards`, {
       method: 'GET',
-      headers: {
-        credentials: 'include',
-        'content-type': 'application/json',
-        authorization: this._authorization
-      }
+      headers: this._header
     })
       .then((res) => {
         return this._getResponseData(res);
@@ -30,11 +26,7 @@ class Api {
   getDataProfile() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
-      headers: {
-        credentials: 'include',
-        'content-type': 'application/json',
-        authorization: this._authorization
-      }
+      headers: this._header
     })
       .then((res) => {
         return this._getResponseData(res);
@@ -46,11 +38,7 @@ class Api {
   patchDataProfile(data) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
-      headers: {
-        credentials: 'include',
-        'content-type': 'application/json',
-        authorization: this._authorization
-      },
+      headers: this._header,
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -65,11 +53,7 @@ class Api {
   patchAvatarProfile(data) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-        credentials: 'include',
-        'content-type': 'application/json',
-        authorization: this._authorization
-      },
+      headers: this._header,
       body: JSON.stringify({
         avatar: data.avatar
       })
@@ -83,11 +67,7 @@ class Api {
   postNewCard(data) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
-      headers: {
-        credentials: 'include',
-        'content-type': 'application/json',
-        authorization: this._authorization
-      },
+      headers: this._header,
       body: JSON.stringify({
         name: data.name,
         link: data.link
@@ -118,11 +98,7 @@ class Api {
     if (isLiked) {
       return fetch(`${this._url}/cards/${dataId}/likes`, {
         method: 'PUT',
-        headers: {
-          credentials: 'include',
-          'content-type': 'application/json',
-          authorization: this._authorization
-        }
+        headers: this._header
       })
         .then((res) => {
           return this._getResponseData(res);
@@ -131,11 +107,7 @@ class Api {
     else {
       return fetch(`${this._url}/cards/${dataId}/likes/`, {
         method: 'DELETE',
-        headers: {
-          credentials: 'include',
-          'content-type': 'application/json',
-          authorization: this._authorization
-        }
+        headers: this._header
       })
         .then((res) => {
           return this._getResponseData(res);
@@ -148,6 +120,8 @@ class Api {
 export const instApi = new Api({
   url: BASE_URL,
   headers: {
-    authorization: `Bearer ${localStorage.getItem("token")}`,
+    credentials: 'include',
+    'content-type': 'application/json',
+    authorization: `Bearer ${localStorage.getItem("jwt")}`,
   }
 });
