@@ -1,7 +1,7 @@
 const allowedCors = [
-  'https://practic.front.nvv.nomoreparties.sbs/#',
-  'http://practic.front.nvv.nomoreparties.sbs/#',
-  'http://localhost:3000/#',
+  'https://practic.front.nvv.nomoreparties.sbs',
+  'http://practic.front.nvv.nomoreparties.sbs',
+  'http://localhost:3000',
 ];
 
 module.exports = (req, res, next) => {
@@ -16,6 +16,7 @@ module.exports = (req, res, next) => {
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', requestHeaders);
+    res.header('Access-Control-Allow-Credentials', true);
     return res.end();
   }
 
