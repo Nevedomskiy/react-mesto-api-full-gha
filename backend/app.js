@@ -13,8 +13,8 @@ const auth = require('./middlewares/auth');
 const { validIsURL } = require('./validation/validation');
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-// const cors = require('./middlewares/corsOptions');
 const corsOptions = require('./middlewares/corsOptions');
+const { login, createUser } = require('./controllers/users');
 
 const URL = 'mongodb://localhost:27017/mestodb';
 const app = express();
@@ -23,7 +23,6 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
 });
-const { login, createUser } = require('./controllers/users');
 
 mongoose
   .connect(URL, {
@@ -31,20 +30,13 @@ mongoose
     family: 4,
   });
 
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', 'https://practic.front.nvv.nomoreparties.sbs');
-//   res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept');
-//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-//   next();
-// });
-
-app.use(limiter);
-app.use(helmet());
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(requestLogger);
+app.use(limiter);
+// app.use(helmet());
+app.use(cookieParser());
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(corsOptions);
 // app.get('/crash-test', () => {
 //   setTimeout(() => {
