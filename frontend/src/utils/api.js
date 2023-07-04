@@ -119,8 +119,8 @@ class Api {
 
 export const instApi = new Api({
   url: BASE_URL,
+  credentials: 'include',
   headers: {
-    credentials: 'include',
     'content-type': 'application/json',
     authorization: `Bearer ${localStorage.getItem("jwt")}`,
   }
