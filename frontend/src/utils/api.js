@@ -13,7 +13,10 @@ class Api {
 
   //получение данных карточек
   getDataCards() {
-    return fetch(`${this._url}/cards`, this._config)
+    return fetch(`${this._url}/cards`, {
+      ...this._config,
+      method: 'GET',
+    })
       .then((res) => {
         return this._getResponseData(res);
       })
@@ -21,11 +24,13 @@ class Api {
 
   //получение данных пользователя
   getDataProfile() {
-    return fetch(`${this._url}/users/me`, this._config)
+    return fetch(`${this._url}/users/me`, {
+      ...this._config,
+      method: 'GET',
+    })
       .then((res) => {
         return this._getResponseData(res);
       })
-
   }
 
   //редактирование данных пользователя
@@ -76,7 +81,7 @@ class Api {
   deleteCard(dataId) {
     return fetch(`${this._url}/cards/${dataId}`, {
       ...this._config,
-      method: 'DELETE',     
+      method: 'DELETE',
     })
       .then((res) => {
         return this._getResponseData(res);
@@ -113,5 +118,6 @@ export const instApi = new Api({
   credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
-  }
+    // cookie: jwt = `Bearer ${localStorage.getItem('jwt')}`,
+  },
 });

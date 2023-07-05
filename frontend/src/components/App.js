@@ -43,12 +43,12 @@ function App() {
       ])
       .then(([userData, cardData]) => {
         setСurrentUser(userData);
-        setCards(cardData)
+        setCards(cardData);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [currentUser]);
 
   const handleLogin = (email) => {
     setLoggedIn(true);

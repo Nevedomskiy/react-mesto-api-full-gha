@@ -28,7 +28,6 @@ function Login({ handleLogin, currentEmail, handeleOpenPopupFail }) {
       }
       auth.authorize(formValue.email, formValue.password)
          .then((data) => {
-            console.log(formValue.email, formValue.password);
             if (data.token) {
                setFormValue({ email: '', password: '' });
                handleLogin(data.email);
