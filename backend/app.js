@@ -25,7 +25,7 @@ const limiter = rateLimit({
 });
 
 app.use(requestLogger);
-app.use(limiter);
+// app.use(limiter);
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());

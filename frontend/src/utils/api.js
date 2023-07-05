@@ -98,8 +98,7 @@ class Api {
         .then((res) => {
           return this._getResponseData(res);
         })
-    }
-    else {
+    } else {
       return fetch(`${this._url}/cards/${dataId}/likes/`, {
         ...this._config,
         method: 'DELETE',

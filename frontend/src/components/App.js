@@ -48,7 +48,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, [currentUser]);
+  }, [loggedIn]);
 
   const handleLogin = (email) => {
     setLoggedIn(true);
@@ -71,7 +71,7 @@ function App() {
   tempLogin.current = tokenCheck;
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     instApi.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
