@@ -3,7 +3,7 @@ import Card from './Card.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 
-function Main({ onEditProfile, onAddPlace, onCardDelete, onEditAvatar, onCardLike, onCardClick, cardsData }) {
+function Main({ onEditProfile, onAddPlace, onCardDelete, onCardRemoveClick, onEditAvatar, onCardLike, onCardClick, cardsData }) {
    const translationUserData = useContext(CurrentUserContext);
 
    return (
@@ -60,6 +60,7 @@ function Main({ onEditProfile, onAddPlace, onCardDelete, onEditAvatar, onCardLik
                         onCardDelete={onCardDelete}
                         onCardLike={onCardLike}
                         onCardClick={onCardClick}
+                        onCardRemoveClick={onCardRemoveClick}
                         card={element}
                      />
                   );

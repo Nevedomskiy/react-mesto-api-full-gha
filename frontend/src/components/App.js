@@ -26,6 +26,7 @@ function App() {
   const [isCardPopupOpen, setCardPopupOpen] = useState(false);
   const [isSuccessPopupOpen, setSuccessPopupOpen] = useState(false);
   const [isFailPopupOpen, setFailPopupOpen] = useState(false);
+  const [isСonsentPopupOpen, setСonsentPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setСurrentUser] = useState({});
   const [cards, setCards] = useState([]);
@@ -125,12 +126,13 @@ function App() {
       });
   }
 
-  function handleCardDelete(card) {
-    instApi.deleteCard(card._id)
+  function handleCardDelete() {
+    instApi.deleteCard(selectedCard._id)
       .then(() => {
         setCards(cards.filter(item =>
-          item !== card
+          item !== selectedCard
         ))
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
@@ -149,6 +151,11 @@ function App() {
     setAddPlacePopupOpen(true)
   }
 
+  function handleRemoveCardClick(card) {
+    setСonsentPopupOpen(true);
+    setSelectedCard(card);
+  }
+
   function handleCardClick(card) {
     setSelectedCard(card);
     setCardPopupOpen(true);
@@ -159,6 +166,7 @@ function App() {
     setEditProfilePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setSelectedCard({});
+    setСonsentPopupOpen(false);
     setCardPopupOpen(false);
     setFailPopupOpen(false);
     setSuccessPopupOpen(false);
@@ -184,11 +192,11 @@ function App() {
                   loggedIn={loggedIn}
                   onEditProfile={handleEditProfileClick}
                   cardsData={cards}
-                  onCardDelete={handleCardDelete}
                   onCardLike={handleCardLike}
                   onAddPlace={handleAddPlaceClick}
                   onEditAvatar={handleEditAvatarClick}
                   onCardClick={handleCardClick}
+                  onCardRemoveClick={handleRemoveCardClick}
                   element={Main}
                 />
               }
@@ -215,6 +223,8 @@ function App() {
           <PopupWithForm
             buttonText={"Да"}
             name={'confirmation'}
+            isOpen={isСonsentPopupOpen}
+            onCardDelete={handleCardDelete}
             onClose={closeAllPopups}
             title={"Вы уверены?"}>
           </PopupWithForm>

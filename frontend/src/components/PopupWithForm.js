@@ -1,4 +1,4 @@
-function PopupWithForm({ buttonText, name, title, isOpen, onClose, onSubmit, children }) {
+function PopupWithForm({ buttonText, name, title, isOpen, onCardDelete, onClose, onSubmit, children }) {
    return (
       <div className={`popup popup_type_${name}${isOpen ? ' popup_active' : ''}`}>
          <div className="popup__container">
@@ -13,6 +13,7 @@ function PopupWithForm({ buttonText, name, title, isOpen, onClose, onSubmit, chi
                {children}
 
                <button
+                  onClick={onCardDelete}
                   type="submit"
                   className="popup__submit-btn"
                >
