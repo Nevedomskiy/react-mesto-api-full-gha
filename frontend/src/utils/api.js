@@ -118,6 +118,6 @@ export const instApi = new Api({
   credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
-    // cookie: jwt = `Bearer ${localStorage.getItem('jwt')}`,
+    cookies: `jwt=${localStorage.getItem('jwt')}`,
   },
 });
