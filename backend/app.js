@@ -1,6 +1,5 @@
 require('dotenv').config();
 const helmet = require('helmet');
-const cors = require('cors');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
@@ -22,10 +21,12 @@ const { PORT = 3000 } = process.env;
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
 });
 
 app.use(requestLogger);
-// app.use(limiter);
+app.use(limiter);
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
@@ -33,11 +34,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(corsOptions);
-// app.get('/crash-test', () => {
-//   setTimeout(() => {
-//     throw new Error('Сервер сейчас упадёт');
-//   }, 0);
-// });
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 mongoose
   .connect(URL, {
