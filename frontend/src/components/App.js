@@ -46,7 +46,6 @@ function App() {
         .then(([userData, cardData]) => {
           setСurrentUser(userData);
           setCards(cardData);
-          console.log(loggedIn);
         })
         .catch((err) => {
           console.log(err);
@@ -61,7 +60,6 @@ function App() {
 
   const tokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
-    console.log(jwt);
     if (jwt) {
       auth.getContent(jwt)
         .then((res) => {
