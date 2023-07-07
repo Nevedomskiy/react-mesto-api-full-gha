@@ -63,11 +63,11 @@ app.use(errors());
 // обработка ошибки с неправильным адресом запроса
 app.use(errorBadUrl);
 
-// конечная обработка ошибок
-app.use(errorHandler);
-
 // логирование ошибок
 app.use(errorLogger);
+
+// конечная обработка ошибок
+app.use(errorHandler);
 
 app.listen(PORT, (err) => {
   // eslint-disable-next-line no-console, no-unused-expressions
