@@ -5,7 +5,6 @@ const { validIsURL } = require('../validation/validation');
 const {
   getUsers,
   getUserById,
-  createUser,
   getUserInfo,
   changeUserInfo,
   changeUserAvatar,
