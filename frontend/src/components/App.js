@@ -36,20 +36,23 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    Promise.all(
-      [
-        instApi.getDataProfile(),
-        instApi.getDataCards(),
-        tempLogin.current()
-      ])
-      .then(([userData, cardData]) => {
-        setСurrentUser(userData);
-        setCards(cardData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [loggedIn]);
+    if (loggedIn) {
+      Promise.all(
+        [
+          instApi.getDataProfile(),
+          instApi.getDataCards(),
+          tempLogin.current()
+        ])
+        .then(([userData, cardData]) => {
+          setСurrentUser(userData);
+          setCards(cardData);
+          console.log(loggedIn);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn, navigate]);
 
   const handleLogin = (email) => {
     setLoggedIn(true);
@@ -58,6 +61,7 @@ function App() {
 
   const tokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
+    console.log(jwt);
     if (jwt) {
       auth.getContent(jwt)
         .then((res) => {

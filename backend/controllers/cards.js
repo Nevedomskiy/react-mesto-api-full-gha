@@ -2,6 +2,7 @@ const Card = require('../models/card');
 const { changeLike, getData } = require('./helpers/helpers');
 const AssertionError = require('../errors/assertion-error');
 const NotFoundError = require('../errors/not-found-err');
+const BadRequestError = require('../errors/bad-request-error');
 
 const errMessageCardNotFound = 'Карточка не найдена';
 
@@ -15,7 +16,13 @@ const createCard = (req, res, next) => {
   Card
     .create({ name, link, owner })
     .then((card) => res.status(201).send(card))
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        next(new BadRequestError('Переданы некорректные данные при создании карточки.'));
+      } else {
+        next(err);
+      }
+    });
 };
 
 const removeCardById = (req, res, next) => {

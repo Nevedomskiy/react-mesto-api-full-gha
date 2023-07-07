@@ -1,94 +1,75 @@
 require('dotenv').config();
 const helmet = require('helmet');
 const express = require('express');
-const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const { errors, celebrate, Joi } = require('celebrate');
-const cardRouter = require('./routes/cards');
-const userRouter = require('./routes/users');
-const auth = require('./middlewares/auth');
-const { validIsURL } = require('./validation/validation');
-const NotFoundError = require('./errors/not-found-err');
+const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const errorBadUrl = require('./middlewares/errorBadUrl');
+const errorHandler = require('./middlewares/errorHandler');
 const corsOptions = require('./middlewares/corsOptions');
-const { login, createUser } = require('./controllers/users');
+const routes = require('./routes/index');
+const limiterOptions = require('./middlewares/limiterOptions');
 
+const { PORT = 3000 } = process.env;
 const URL = 'mongodb://localhost:27017/mestodb';
 const app = express();
-const { PORT = 3000 } = process.env;
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  standardHeaders: true,
-  legacyHeaders: false,
-});
 
+// логирование запросов
 app.use(requestLogger);
-app.use(limiter);
+
+// блокировка множественных запросов(от DoS-атак)
+app.use(limiterOptions);
+
+// защита express(шифрование заголовков)
 app.use(helmet());
+
+// парсинг кук
 app.use(cookieParser());
+
+// преобразование ответа в формат json
 app.use(express.json());
+
+// проверка тела запроса
 app.use(bodyParser.json());
+
+// поддержка анализа данных запроса
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// подключение cors(защита от посторонних запросов)
 app.use(corsOptions);
+
+// проверка работоспособности pm2 на сервере(поднимает сервер после ошибки)
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
 
+// подключаем базу данных
 mongoose
   .connect(URL, {
     useNewUrlParser: true,
     family: 4,
   });
-app.post(
-  '/signin',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().required().email(),
-      password: Joi.string().required(),
-    }),
-  }),
-  login,
-);
-app.post(
-  '/signup',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().required().email(),
-      password: Joi.string().required(),
-      name: Joi.string().min(2).max(30),
-      about: Joi.string().min(2).max(30),
-      avatar: Joi.string().custom(validIsURL),
-    }),
-  }),
-  createUser,
-);
 
-app.use(auth);
-app.use('/cards', cardRouter);
-app.use('/users', userRouter);
-app.use(errorLogger);
+// обработка запросов
+app.use(routes);
+
+// обработка ошибок celebrate
 app.use(errors());
-app.use((req, res) => {
-  throw new NotFoundError('Маршрут указан некорректно');
-});
-app.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
 
-  res
-    .status(statusCode)
-    .send({
-      message: statusCode === 500
-        ? 'На сервере произошла ошибка'
-        : message,
-    });
-});
+// обработка ошибки с неправильным адресом запроса
+app.use(errorBadUrl);
+
+// конечная обработка ошибок
+app.use(errorHandler);
+
+// логирование ошибок
+app.use(errorLogger);
 
 app.listen(PORT, (err) => {
+  // eslint-disable-next-line no-console, no-unused-expressions
   err ? console.log(err) : console.log(`Listening port ${PORT}`);
 });
